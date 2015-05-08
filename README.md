@@ -1,7 +1,9 @@
 #TickyTacky
 ### Objects and flow
 Game object *should control most of the gameflow, delegate turns, and watch for victory conditions*
+
 Player object *keeps track of wins, player tokens*
+
 Board object *builds/destroys board, keeps track of piece locations*
 
 ### Technologies Used
