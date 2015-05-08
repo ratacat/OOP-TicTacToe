@@ -1,1 +1,18 @@
 /* Style Sheet */
+
+.square{
+	width: 200px;
+	height:200px;
+	border: 1px solid #000;
+	border-radius:3px;
+	background-color:#ddd;
+	display:inline-block;
+	margin:4px;
+}
+
+div#board{
+	margin: 0 auto;
+	display:block;
+	width:650px;
+}
+.hide{visibility:hidden}
