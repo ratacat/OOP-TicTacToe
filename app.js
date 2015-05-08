@@ -32,12 +32,40 @@
 
   // A starter Board constructor.
   function Board() {
+      this.squares = [];
+
     //Tracks the cells of the board instance
     //this.$cells = ...
 
     //Store any other properties that board may have below, such as a reset option
   };
 
+Board.prototype.init = function() {
+      //build board
+      var $board = $('<div id="board">');
+
+      for (i=0;i<9;i++){
+            $board.append('<div class="square">');
+      }
+
+      $('body').append($board);
+      console.log($board);
+}
+
+Board.prototype.destroy = function() {
+     var $board = $('#board');
+     console.log($board);
+     $board.remove();
+}
+
+//on window load
+$(document).ready (function(){
+
+  //temporary driver
+  b = new Board();
+
   // Start the game!
   var game = new Game();
   game.init();
+
+});
