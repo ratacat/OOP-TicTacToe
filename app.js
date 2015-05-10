@@ -4,6 +4,12 @@ $(document).ready (function(){
    //and we're off!
   game = new Game();
 
+  //set event listeners;
+  game.board.$squares = $('.square');
+  game.board.$squares.click(function(e){
+    game.nextMove(e);
+  });
+
    //decide who goes first
    game.turn = game.players[Math.round(Math.random()) ];
 
@@ -50,13 +56,23 @@ $(document).ready (function(){
     this.board.$squares.eq(indexClicked).addClass("taken");
     this.board.$squares.eq(indexClicked).text(this.turn.symbol);
 
+    //check for winner
+    var wins = this.haveWinner();
+    if (wins) {alert();return wins;}
+
     //toggle this.turn between index 0 and 1 of players array
     this.turn = this.players[this.players[0] === this.turn ? 1 : 0];
     $('h2').text(this.turn.name + " It's your turn!");
   }
 
   Game.prototype.loadBoard = function() {
+
       return new Board();
+  }
+
+  Game.prototype.clearBoard = function() {
+    this.board.$squares.removeClass("taken").text("");
+  
   }
 
   Game.prototype.addPlayer = function(name,symbol) {
@@ -64,6 +80,21 @@ $(document).ready (function(){
      this.players.push(player);
     return player;
   }
+
+  Game.prototype.haveWinner = function(){
+     var wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+     for (var i=0;i<wins.length-1;i++) {
+        if (this.threeInRow(wins[i][0],wins[i][1],wins[i][2])) {return wins[i].join();}
+     }
+  }
+
+  Game.prototype.threeInRow = function(one, two, three) {
+    if (this.moves[one] === this.moves[two] && this.moves[two] === this.moves[three] && this.moves[one] !== undefined ) {
+      return true;
+    } else {
+      return false;
+    }
+}
   
   Player = function(name,symbol) {
       this.name = name;
@@ -88,13 +119,6 @@ Board.prototype.init = function() {
        
       $('body').append($board);
 
-        // oneClick();
-      this.$squares = $('.square');
-      this.$squares.click(function(e){
-        game.nextMove(e);
-        //console.log("Click on #" +e.target.id);
-      });
-
 }
 
 //removes the board from dom document
@@ -103,3 +127,6 @@ Board.prototype.destroy = function() {
      console.log($board);
      $board.remove();
 }
+
+//utility functions
+
