@@ -8,11 +8,24 @@
 	background-color:#ddd;
 	display:inline-block;
 	margin:4px;
+                    opacity:.9;
+}
+
+.taken {
+      opacity: .2;
 }
 
 div#board{
+                   vertical-align: center;
+                   text-align: center;
 	margin: 0 auto;
 	display:block;
-	width:650px;
+	width:640px;
+                    height:640px;
+                    background-image:url(img/crazyhorse.jpg);
+                    background-position:center;
+
+                    background-size:auto 100%;
+                    background-repeat: no-repeat;
 }
 .hide{visibility:hidden}
