@@ -29,13 +29,25 @@ $(document).ready (function(){
   }
 
   Game.prototype.nextMove = function(e) {
-    
-    console.log(this.turn.name + " just clicked on " + e.target.id);
+    var indexClicked;
+    console.log(this.turn.name + " just clicked on " + e.target);
     //check whose turn it is
     this.turn.name;
 
+
+
+
+    //grab numerical index of clicked box
+    this.board.$squares.each(function(index,element) {
+      if (element === e.target) {indexClicked = index;};
+    });
+
     //check whether requested move is open
-    //record move in this.board
+    this.board.$squares.eq(indexClicked)
+
+    //record move in Game.moves
+    this.moves[indexClicked] = this.turn.piece;
+    this.board.$squares.eq(indexClicked).addClass("taken");
 
     //toggle this.turn between index 0 and 1 of players array
     this.turn = this.players[this.players[0] === this.turn ? 1 : 0];
@@ -50,7 +62,7 @@ $(document).ready (function(){
      this.players.push(player);
     return player;
   }
-
+  
   Player = function(name,piece) {
       this.name = name;
       this.piece = piece;
