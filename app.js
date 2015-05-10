@@ -52,6 +52,7 @@ $(document).ready (function(){
 
     //toggle this.turn between index 0 and 1 of players array
     this.turn = this.players[this.players[0] === this.turn ? 1 : 0];
+    $('h2').text(this.turn.name + " It's your turn!");
   }
 
   Game.prototype.loadBoard = function() {

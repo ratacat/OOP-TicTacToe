@@ -2,41 +2,49 @@
 body {
       background-color: #000;
 }
+
+h2 {
+      color:#A54BFF;
+
+}
 .square{
-	width: 200px;
-	height:200px;
-	border: 1px solid #000;
-	border-radius:3px;
-	background-color:#ddd;
-	display:inline-block;
-	margin:4px;
-                  background: rgba(50,50,50,0.9);
-                  overflow:hidden;
-                  font-size:170px;
-                  vertical-align: middle;
+      width: 200px;
+      height:200px;
+      border: 1px solid #000;
+      border-radius:3px;
+      background-color:#ddd;
+      display:inline-block;
+      margin:4px;
+      background: rgba(50,50,50,0.9);
+      overflow:hidden;
+      font-size:170px;
+      vertical-align: middle;
 }
 
 .taken {
+      color:#905757;
       background: rgba(255,255,255,0.1);
 }
 
 #turn_label {
+      color:#0E92C2;
       margin:0 auto;
-      width:270px;
+      width:450px;
       text-align: center;
+      margin-top:20px;
+      margin-bottom: 20px;
 }
 
 div#board{
-                   vertical-align: center;
-                   text-align: center;
-	margin: 0 auto;
-	display:block;
-	width:640px;
-                    height:640px;
-                    background-image:url(img/crazyhorse.jpg);
-                    background-position:center;
-
-                    background-size:auto 100%;
-                    background-repeat: no-repeat;
+      vertical-align: center;
+      text-align: center;
+      margin: 0 auto;
+      display:block;
+      width:640px;
+      height:640px;
+      background-image:url(img/crazyhorse2.jpg);
+      background-position:center;
+      background-size:auto 100%;
+      background-repeat: no-repeat;
 }
 .hide{visibility:hidden}
