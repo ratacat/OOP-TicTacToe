@@ -9,32 +9,38 @@ $(document).ready (function(){
    p2 = game.addPlayer("Ruthless Mercenary","R");
 
    //decide who goes first
-   game.firstTurn = game.players[Math.round(Math.random()) ];
+   game.turn = game.players[Math.round(Math.random()) ];
 
-   
+   //display some context 
+
+   //wait for first move
+
 });
 
 
 
-  function Game() {
+  Game = function() {
     this.board = this.loadBoard();
-    
+    this.turn = undefined;
     this.players = [];
     this.moves = [];
 
 
   }
 
-  // Remember: prototypes are shared functions between all game instances
-  Game.prototype.nextMove = function() {
-    //check to see if firstmove is set
-    //pick a player and start with them
+  Game.prototype.nextMove = function(e) {
+    
+    console.log(this.turn.name + " just clicked on " + e.target.id);
+    //check whose turn it is
+    this.turn.name;
+
     //check whether requested move is open
     //record move in this.board
-    //alternate based on movement record
+
+    //toggle this.turn between index 0 and 1 of players array
+    this.turn = this.players[this.players[0] === this.turn ? 1 : 0];
   };
 
-  // Game.prototype.init kicks off a new game with a board and two players
   Game.prototype.loadBoard = function() {
       return new Board();
   };
@@ -45,20 +51,14 @@ $(document).ready (function(){
     return player;
   }
 
-  Game.prototype.move = function(){
-    console.log("Game.move fired!");
-  }
-
-  // A starter Player constructor.
-  function Player(name,piece) {
+  Player = function(name,piece) {
       this.name = name;
       this.piece = piece;
     //Is the player X or O?
     //this.team = ...
   };
 
-  // A starter Board constructor.
-  function Board() {
+  Board = function() {
       this.init();
 
   };
@@ -78,7 +78,7 @@ Board.prototype.init = function() {
         // oneClick();
       this.$squares = $('.square');
       this.$squares.click(function(e){
-        game.move();
+        game.nextMove(e);
         //console.log("Click on #" +e.target.id);
       });
 
