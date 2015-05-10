@@ -1,5 +1,7 @@
 /* Style Sheet */
-
+body {
+      background-color: #000;
+}
 .square{
 	width: 200px;
 	height:200px;
@@ -8,11 +10,20 @@
 	background-color:#ddd;
 	display:inline-block;
 	margin:4px;
-                    opacity:.9;
+                  background: rgba(50,50,50,0.9);
+                  overflow:hidden;
+                  font-size:170px;
+                  vertical-align: middle;
 }
 
 .taken {
-      opacity: .2;
+      background: rgba(255,255,255,0.1);
+}
+
+#turn_label {
+      margin:0 auto;
+      width:270px;
+      text-align: center;
 }
 
 div#board{

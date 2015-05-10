@@ -3,17 +3,15 @@ $(document).ready (function(){
 
    //and we're off!
   game = new Game();
-  
-  //lets get a few players
-   p1 = game.addPlayer("John","X");
-   p2 = game.addPlayer("Ruthless Mercenary","R");
 
    //decide who goes first
    game.turn = game.players[Math.round(Math.random()) ];
 
    //display some context 
+   $('body').prepend($turn_label = $('<h2 id="turn_label">').text('Whose turn is it anyway?'));
 
    //wait for first move
+   $turn_label.text(game.turn.name + " its your turn!");
 
 });
 
@@ -25,6 +23,10 @@ $(document).ready (function(){
     this.players = [];
     this.moves = [];
 
+    //lets get a few players
+   p1 = this.addPlayer("John","X");
+   p2 = this.addPlayer("Ruthless Mercenary","R");
+
 
   }
 
@@ -34,28 +36,27 @@ $(document).ready (function(){
     //check whose turn it is
     this.turn.name;
 
-
-
-
     //grab numerical index of clicked box
     this.board.$squares.each(function(index,element) {
       if (element === e.target) {indexClicked = index;};
     });
 
     //check whether requested move is open
-    this.board.$squares.eq(indexClicked)
+    isTaken = this.board.$squares.eq(indexClicked).hasClass("taken");
+    if (isTaken) {return false;}
 
     //record move in Game.moves
-    this.moves[indexClicked] = this.turn.piece;
+    this.moves[indexClicked] = this.turn.symbol;
     this.board.$squares.eq(indexClicked).addClass("taken");
+    this.board.$squares.eq(indexClicked).text(this.turn.symbol);
 
     //toggle this.turn between index 0 and 1 of players array
     this.turn = this.players[this.players[0] === this.turn ? 1 : 0];
-  };
+  }
 
   Game.prototype.loadBoard = function() {
       return new Board();
-  };
+  }
 
   Game.prototype.addPlayer = function(name,symbol) {
      player = new Player(name,symbol);
@@ -63,17 +64,17 @@ $(document).ready (function(){
     return player;
   }
   
-  Player = function(name,piece) {
+  Player = function(name,symbol) {
       this.name = name;
-      this.piece = piece;
+      this.symbol = symbol;
     //Is the player X or O?
     //this.team = ...
-  };
+  }
 
   Board = function() {
       this.init();
 
-  };
+  }
 
 //builds the board with jquery and inserts
 //it into body tag of document
@@ -84,7 +85,6 @@ Board.prototype.init = function() {
             $board.append('<div id="square'+i+'"" class="square">');
       }
        
-
       $('body').append($board);
 
         // oneClick();
