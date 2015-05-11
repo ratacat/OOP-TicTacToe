@@ -1,6 +1,6 @@
 //on window load start the game
 $(document).ready (function(){
-  var win;
+  win =null;
    //and we're off!
   game = new Game();
 
@@ -8,10 +8,10 @@ $(document).ready (function(){
   game.board.$squares = $('.square');
   game.board.$squares.click(function(e){
     if (win =  game.nextMove(e)) {
-      alert(win);
-     // game.clearBoard();
-      $turn_label.text()
-      //game.moves = [];
+      //alert(win);
+     
+      $turn_label.text(win[0].name + " takes the game! Congrats! Click to play again.");
+      win[0].wins++;
     }
   
   });
@@ -46,6 +46,18 @@ $(document).ready (function(){
   Game.prototype.nextMove = function(e) {
     var indexClicked;
     console.log(this.turn.name + " just clicked on " + e.target);
+    
+    //clean up and reset game after someone wins
+    if (win) {
+      game.moves = [];
+      game.clearBoard();
+      win = null;
+      game.turn = game.players[Math.round(Math.random()) ];
+      $turn_label.text(game.turn.name + " its your turn!");
+
+      return 0;
+    } 
+
     //check whose turn it is
     this.turn.name;
 
@@ -117,6 +129,7 @@ $(document).ready (function(){
   Player = function(name,symbol) {
       this.name = name;
       this.symbol = symbol;
+      this.wins = 0;
     //Is the player X or O?
     //this.team = ...
   }
@@ -135,9 +148,10 @@ Board.prototype.init = function() {
             $board.append('<div id="square'+i+'"" class="square">');
       }
        
-      $('body').append($board);
+      $('body').append($board);  
 
 }
+
 
 //removes the board from dom document
 Board.prototype.destroy = function() {
